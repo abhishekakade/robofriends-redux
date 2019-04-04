@@ -58,7 +58,9 @@ class App extends Component {
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(response => response.json())
-      .then(users => { this.setState({ robots: users }) })
+      .then(users => {
+        this.setState({ robots: users });
+      })
       .catch(err => console.log(err));
   }
 
@@ -69,33 +71,31 @@ class App extends Component {
   // commented out because we are getting it as props in mapDispatchToProps
 
   render() {
-
     // , searchField
     // commented out searchField from this.state because its coming down as props so made a new const below for that
 
     let { searchField, onSearchChange } = this.props;
-    let { robots } = this.state;
-    console.log(this.state.robots);
 
-    let filteredRobots = robots.filter(robot => robot.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase()));
+    let { robots } = this.state;
+    // console.log(this.state);
+    // console.log(searchField);
 
     // added onSearchChange as it is now coming from props and isnt a part of App.js component
 
-
-    if (!robots.length) {
+    if (robots.length < 1) {
       return <h2>LOADING...</h2>;
     } else {
+      let filteredRobots = robots.filter(robot =>
+        robot.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())
+      );
+
       return (
         <div className="tc">
           <div>
             <h1 className="f1">RoboFriends</h1>
             <SearchBox searchChange={onSearchChange} />
           </div>
-          {/* <Scroll> */}
-          {/* <ErrorBoundary> */}
           <CardList robots={filteredRobots} />
-          {/* </ErrorBoundary> */}
-          {/* </Scroll> */}
         </div>
       );
     }
