@@ -1,6 +1,6 @@
 {
-  "homepage": "http://abhishekakade.github.io/robo-friends",
-  "name": "robofriends",
+  "homepage": "http://abhishekakade.github.io/robofriends-redux",
+  "name": "robofriends-redux",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

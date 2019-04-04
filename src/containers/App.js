@@ -55,14 +55,11 @@ class App extends Component {
     };
   }
 
-  fetchFunc() {
-    return (fetch("https://jsonplaceholder.typicode.com/users")
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
       .then(response => response.json())
-      // .then(resp => {
-      //   console.log(resp);
-      // })
       .then(users => { this.setState({ robots: users }) })
-      .catch(err => console.log(err)));
+      .catch(err => console.log(err));
   }
 
   // onSearchChange = event => {
@@ -73,14 +70,11 @@ class App extends Component {
 
   render() {
 
-    this.fetchFunc();
-
     // , searchField
     // commented out searchField from this.state because its coming down as props so made a new const below for that
 
-    const { searchField, onSearchChange } = this.props;
-
-    const { robots } = this.state;
+    let { searchField, onSearchChange } = this.props;
+    let { robots } = this.state;
     console.log(this.state.robots);
 
     let filteredRobots = robots.filter(robot => robot.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase()));
